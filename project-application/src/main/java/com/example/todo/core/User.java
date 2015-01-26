@@ -1,10 +1,14 @@
 package com.example.todo.core;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,6 +32,10 @@ public class User {
 	
 	@Column(name = "lastName", nullable = false)
     private String lastName;
+	
+	@ManyToOne()
+	@JoinColumn(name="book_id")
+	private Set<Book> books;
 
 	public long getId() {
 		return id;
@@ -51,5 +59,13 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 }
