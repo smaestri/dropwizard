@@ -1,14 +1,16 @@
 package com.example.todo.db;
 
+import com.example.todo.api.ExternalTodo;
 import com.example.todo.core.Todo;
-import com.example.todo.core.Todo;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
-import com.example.todo.core.Todo;
 
 import java.util.List;
 
 public class TodoDAO extends AbstractDAO<Todo> {
+
+    @Inject
     public TodoDAO(SessionFactory factory) {
         super(factory);
     }
@@ -17,7 +19,9 @@ public class TodoDAO extends AbstractDAO<Todo> {
 //        return Optional.fromNullable(get(id));
 //    }
 
-    public Todo create(Todo todo) {
+    public Todo create(ExternalTodo etodo) {
+        Todo todo = new Todo();
+        todo.setLibelle(etodo.getLibelle());
         return persist(todo);
     }
 

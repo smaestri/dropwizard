@@ -1,8 +1,10 @@
 package com.example.todo.resources;
 
+import com.example.todo.api.ExternalTodo;
 import com.example.todo.core.Todo;
 import com.example.todo.db.TodoDAO;
 import com.example.todo.view.TodoView;
+import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -16,43 +18,29 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TodoResource {
 
-    private int id;
-    private String libelle;
-
     private final TodoDAO todoDao;
 
+    @Inject
     public TodoResource(TodoDAO todoDao) {
         this.todoDao = todoDao;
     }
 
     /**
      * Get todos for freemarker
+     *
      * @return
      */
     @GET
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
     public TodoView listTodo() {
-        //Connect to DB
-       // List<ExternalTodo> listToto = new ArrayList<ExternalTodo>();
-
         List<Todo> all = todoDao.findAll();
-
-        //Map TOTO entity to TODO api
-//        List<Todo> all = todoDao.findAll();
-//            for (Todo t : all){
-//                ExternalTodo e = new ExternalTodo();
-//                e.setLibelle(t.getLibelle());
-//                e.setId(t.getId());
-//                listToto.add(e);
-//        }
         return new TodoView(all);
     }
 
     @POST
     @UnitOfWork
-    public Todo createTodo(Todo todo) {
+    public Todo createTodo(ExternalTodo todo) {
         return todoDao.create(todo);
     }
-
 }

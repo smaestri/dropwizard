@@ -1,6 +1,8 @@
+package com.example.todo;
+
 import com.example.todo.core.Todo;
-import com.example.todo.db.TodoDAO;
-import com.example.todo.resources.TodoResource;
+import com.example.todo.module.TodoModule;
+import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -8,7 +10,6 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
-import org.hibernate.SessionFactory;
 
 public class TodoApplication extends Application<TodoConfiguration> {
 
@@ -37,22 +38,22 @@ public class TodoApplication extends Application<TodoConfiguration> {
                 return configuration.getDataSourceFactory();
             }
         });
+
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(new ViewBundle());
+        GuiceBundle<TodoConfiguration> guiceBundle = GuiceBundle.<TodoConfiguration>newBuilder()
+                .addModule(new TodoModule(hibernateBundle))
+                .enableAutoConfig(getClass().getPackage().getName())
+                .setConfigClass(TodoConfiguration.class)
+                //  .setInjectorFactory( new GovernatorInjectorFactory() )
+                .build();
+        bootstrap.addBundle(guiceBundle);
+
     }
 
     @Override
     public void run(TodoConfiguration configuration,
                     Environment environment) {
-
-        SessionFactory sessionFactory = hibernateBundle.getSessionFactory();
-        TodoDAO dao = new TodoDAO(sessionFactory);
-
-        final TodoResource resource = new TodoResource(dao);
-//        final TemplateHealthCheck healthCheck =
-//                new TemplateHealthCheck(configuration.getTemplate());
-//        environment.healthChecks().register("template", healthCheck);
-        environment.jersey().register(resource);
     }
 
 }

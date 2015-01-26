@@ -12,27 +12,26 @@ import javax.persistence.*;
 })
 public class Todo {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-        @Column(name = "libelle", nullable = false)
-        private String libelle;
+    @Column(name = "libelle", nullable = false)
+    private String libelle;
 
+    public long getId() {
+        return id;
+    }
 
-        public long getId() {
-                return id;
-        }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-        public void setId(long id) {
-                this.id = id;
-        }
+    public String getLibelle() {
+        return libelle;
+    }
 
-        public String getLibelle() {
-                return libelle;
-        }
-
-        public void setLibelle(String libelle) {
-                this.libelle = libelle;
-        }
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
 }
