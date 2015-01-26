@@ -15,11 +15,7 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "com.elthumsoft.dropwizard.authentication.core.User.findAll",
             query = "SELECT u FROM User u"
-    ),
-    @NamedQuery(
-    		name = "com.elthumsoft.dropwizard.authentication.core.User.findByPseudo",
-            query = "SELECT u FROM User u where pseudo=:pseudo"
-	)
+    )
 })
 public class User {
 
