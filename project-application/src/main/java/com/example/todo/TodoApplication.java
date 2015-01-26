@@ -3,7 +3,9 @@ package com.example.todo;
 import com.example.todo.core.Todo;
 import com.example.todo.module.TodoModule;
 import com.hubspot.dropwizard.guice.GuiceBundle;
+
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -48,7 +50,9 @@ public class TodoApplication extends Application<TodoConfiguration> {
                 //  .setInjectorFactory( new GovernatorInjectorFactory() )
                 .build();
         bootstrap.addBundle(guiceBundle);
-
+		bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
+	    bootstrap.addBundle(new AssetsBundle("/assets/js","/js", null, "js"));
+	    bootstrap.addBundle(new AssetsBundle("/assets/fonts","/fonts", null, "fonts"));
     }
 
     @Override
