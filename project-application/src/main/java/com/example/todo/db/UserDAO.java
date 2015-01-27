@@ -6,11 +6,13 @@ import org.hibernate.SessionFactory;
 
 import com.example.todo.core.User;
 import com.google.common.base.Optional;
+import com.google.inject.Inject;
 
 import io.dropwizard.hibernate.AbstractDAO;
 
 public class UserDAO extends AbstractDAO<User> {
 
+	@Inject
 	public UserDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
 	}
