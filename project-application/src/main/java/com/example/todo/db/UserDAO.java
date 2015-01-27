@@ -23,6 +23,14 @@ public class UserDAO extends AbstractDAO<User> {
     public Optional<User> create(User user) {
         return Optional.fromNullable(persist(user));
     }
+    
+    public Optional<User> update(User user) {
+    	return Optional.fromNullable(persist(user));
+    }
+    
+    public void delete(User u) {
+    	currentSession().delete(u);
+    }
 
     public List<User> findAll() {
         return list(namedQuery("com.example.todo.core.User.findAll"));
