@@ -19,6 +19,10 @@ public class Todo {
     @Column(name = "libelle", nullable = false)
     private String libelle;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_BOOK", nullable = false)
+    private Book book;
+
     public long getId() {
         return id;
     }
@@ -33,5 +37,13 @@ public class Todo {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.todo.module;
 
 import com.example.todo.TodoConfiguration;
+import com.example.todo.db.BookDAO;
 import com.example.todo.db.TodoDAO;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
@@ -19,8 +20,13 @@ public class TodoModule implements com.google.inject.Module {
     }
 
     @Provides
-    public TodoDAO getDAO() {
+    public TodoDAO getTodoDAO() {
         return new TodoDAO(hibernateBundle.getSessionFactory());
+    }
+
+    @Provides
+    public BookDAO getBookDAO() {
+        return new BookDAO(hibernateBundle.getSessionFactory());
     }
 
 }

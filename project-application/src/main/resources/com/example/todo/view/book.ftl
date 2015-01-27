@@ -1,9 +1,9 @@
 <#-- @ftlvariable name="" type="TodoView" -->
 <html>
     <body>
-    List Taches
-        <#list todos as x>
-          ${x.id} - ${x.libelle}
+    Liste Carnets
+        <#list books as x>
+          ${x.id} - ${x.titre}
         </#list>
     </body>
 </html>

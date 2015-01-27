@@ -7,10 +7,7 @@ import com.example.todo.view.TodoView;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -25,16 +22,21 @@ public class TodoResource {
         this.todoDao = todoDao;
     }
 
-    /**
-     * Get todos for freemarker
-     *
-     * @return
-     */
+
     @GET
     @UnitOfWork
     @Produces(MediaType.TEXT_HTML)
     public TodoView listTodo() {
         List<Todo> all = todoDao.findAll();
+        return new TodoView(all);
+    }
+
+    @GET
+    @Path("{idBook}")
+    @UnitOfWork
+    @Produces(MediaType.TEXT_HTML)
+    public TodoView listTodoFromBook(@PathParam("id") int idBook) {
+        List<Todo> all = todoDao.getTasksFromBook(idBook);
         return new TodoView(all);
     }
 

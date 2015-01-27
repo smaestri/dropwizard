@@ -1,9 +1,9 @@
 package com.example.todo;
 
+import com.example.todo.core.Book;
 import com.example.todo.core.Todo;
 import com.example.todo.module.TodoModule;
 import com.hubspot.dropwizard.guice.GuiceBundle;
-
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
@@ -16,7 +16,7 @@ import io.dropwizard.views.ViewBundle;
 public class TodoApplication extends Application<TodoConfiguration> {
 
     private final HibernateBundle<TodoConfiguration> hibernateBundle =
-            new HibernateBundle<TodoConfiguration>(Todo.class) {
+            new HibernateBundle<TodoConfiguration>(Todo.class, Book.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(TodoConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -47,12 +47,12 @@ public class TodoApplication extends Application<TodoConfiguration> {
                 .addModule(new TodoModule(hibernateBundle))
                 .enableAutoConfig(getClass().getPackage().getName())
                 .setConfigClass(TodoConfiguration.class)
-                //  .setInjectorFactory( new GovernatorInjectorFactory() )
+                        //  .setInjectorFactory( new GovernatorInjectorFactory() )
                 .build();
         bootstrap.addBundle(guiceBundle);
-		bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
-	    bootstrap.addBundle(new AssetsBundle("/assets/js","/js", null, "js"));
-	    bootstrap.addBundle(new AssetsBundle("/assets/fonts","/fonts", null, "fonts"));
+        bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
+        bootstrap.addBundle(new AssetsBundle("/assets/js", "/js", null, "js"));
+        bootstrap.addBundle(new AssetsBundle("/assets/fonts", "/fonts", null, "fonts"));
     }
 
     @Override

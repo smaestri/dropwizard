@@ -1,19 +1,17 @@
 package com.example.todo.db;
 
-import java.util.List;
-
-import org.hibernate.SessionFactory;
-
 import com.example.todo.core.User;
 import com.google.common.base.Optional;
-
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 public class UserDAO extends AbstractDAO<User> {
 
-	public UserDAO(SessionFactory sessionFactory) {
-		super(sessionFactory);
-	}
+    public UserDAO(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
 
     public Optional<User> findById(Long id) {
         return Optional.fromNullable(get(id));

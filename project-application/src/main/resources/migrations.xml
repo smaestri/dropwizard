@@ -14,6 +14,15 @@
             <column name="libelle" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="id_book" type="bigint"></column>
+        </createTable>
+        <createTable tableName="BOOK">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="titre" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
