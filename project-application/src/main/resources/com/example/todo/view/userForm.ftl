@@ -10,6 +10,7 @@
 	<p><a href="/users/list">BACK THE THE LIST</a></p>
 	
 	<form method="POST"  <#if user.isPresent()>  action="/users/edit" <#else> action="/users/create" </#if>>
+		<#if user.isPresent()><input type="hidden" name="id" value="${user.get().getId()}"/></#if>
 		First name : <input type="text" name="firstName" <#if user.isPresent()> value="${user.get().getFirstName()}" </#if>>
 		Last name : <input type="text" name="lastName" <#if user.isPresent()> value ="${user.get().getLastName()}" </#if>>
 		<input type="submit" value="Submit">

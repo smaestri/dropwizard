@@ -1,12 +1,17 @@
 package com.example.todo.core;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,9 +33,9 @@ public class User {
 	
 	@Column(name = "last_name", nullable = false)
     private String lastName;
-	
-//	@ManyToOne()
-//	@JoinColumn(name="book_id")
+//	
+//	@OneToMany()
+//	@JoinColumn(name="id")
 //	private Set<Book> books;
 
 	public long getId() {

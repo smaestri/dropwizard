@@ -1,6 +1,7 @@
 package com.example.todo.resources;
 
 import io.dropwizard.hibernate.UnitOfWork;
+import io.dropwizard.jersey.params.LongParam;
 import io.dropwizard.views.View;
 
 import java.util.List;
@@ -55,14 +56,16 @@ public class UserResource {
 	@Produces(MediaType.TEXT_HTML)
 	@UnitOfWork
 	@POST
-	public View updateUser(User u) {
-		Optional<User> user = userDAO.findById(u.getId());
+	public View updateUser(
+			@FormParam(value = "id") Long id,
+			@FormParam(value = "firstName") String firstName,
+			@FormParam(value = "lastName") String lastName) {
+		Optional<User> user = userDAO.findById(id);
 		if(user.isPresent()) {
 			User userToUpdate = user.get();
-			userToUpdate.setFirstName(u.getFirstName());
-			userToUpdate.setLastName(u.getLastName());
-			// TODO
-			// UPDATE USER
+			userToUpdate.setFirstName(firstName);
+			userToUpdate.setLastName(lastName);
+			userDAO.update(userToUpdate);
 		}
 		return listUsers();
 	}
@@ -86,6 +89,18 @@ public class UserResource {
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		userDAO.create(user);
+		return listUsers();
+	}
+	
+	@Path("/delete")
+	@Produces(MediaType.TEXT_HTML)
+	@UnitOfWork
+	@GET
+	public View deleteUser(@QueryParam(value="id") Long id) {
+		Optional<User> user = userDAO.findById(id);
+		if(user.isPresent()) {
+			userDAO.delete(user.get());
+		} 
 		return listUsers();
 	}
 }

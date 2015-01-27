@@ -7,7 +7,9 @@
 	
 	<ul>
 		<#list users as user>
-			<li>${user.id} ${user.firstName} ${user.lastName} <a href="/users/edit?id=${user.id}">EDIT</a></li>
+			<li>${user.id} ${user.firstName} ${user.lastName} 
+				<a href="/users/edit?id=${user.id}">EDIT</a> <a href="/users/delete?id=${user.id}">DELETE</a>
+			</li>
 		</#list>
 	</ul>
 </html>
