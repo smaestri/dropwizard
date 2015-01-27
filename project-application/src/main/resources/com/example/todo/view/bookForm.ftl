@@ -10,6 +10,7 @@
 	<p><a href="/book/list">BACK THE THE LIST</a></p>
 	
 	<form method="POST"  <#if book.isPresent()>  action="/book/edit" <#else> action="/book/create" </#if>>
+		<#if book.isPresent()><input type="hidden" name="id" value="${book.get().getId()}"/></#if>
 		Titre : <input type="text" name="titre" <#if book.isPresent()> value="${book.get().getTitre()}" </#if>>
 		<input type="submit" value="Submit">
 	</form>

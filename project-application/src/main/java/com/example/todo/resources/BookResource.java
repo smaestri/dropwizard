@@ -36,6 +36,7 @@ public class BookResource {
     @Path("/list")
     @Produces(MediaType.TEXT_HTML)
     public BookListView listAll() {
+        //TODO : jointure sur les taches pour les afficher
         List<Book> all = bookDAO.findAll();
         return new BookListView(all);
     }
@@ -44,9 +45,9 @@ public class BookResource {
     @Produces(MediaType.TEXT_HTML)
     @UnitOfWork
     @GET
-    public View editBook(@QueryParam(value="id") Long id) {
+    public View editBook(@QueryParam(value = "id") Long id) {
         Optional<Book> book = bookDAO.findById(id);
-        if(book.isPresent()) {
+        if (book.isPresent()) {
             return new BookFormView(book.get());
         } else {
             return listAll();
@@ -57,10 +58,13 @@ public class BookResource {
     @Produces(MediaType.TEXT_HTML)
     @UnitOfWork
     @POST
-    public View updateBook() {
-        Optional<Book> book = bookDAO.findById(b.getId());
-        if(book.isPresent()) {
-            // TODO : UPDATE BOOK
+    public View updateBook(@FormParam(value = "id") Long id,
+                           @FormParam(value = "titre") String titre) {
+        Optional<Book> book = bookDAO.findById(id);
+        if (book.isPresent()) {
+            Book bookToUpdate = book.get();
+            bookToUpdate.setTitre(titre);
+            //TODO : set TASK
         }
         return listAll();
     }
@@ -77,7 +81,7 @@ public class BookResource {
     @Produces(MediaType.TEXT_HTML)
     @POST
     @UnitOfWork
-    public View createBook(@FormParam("listeTodo") List<String> listeTodos, @FormParam("titre")  String titre) {
+    public View createBook(@FormParam("listeTodo") List<String> listeTodos, @FormParam("titre") String titre) {
         // creation book et ajout des todos
         Book book = new Book();
         book.setTitre(titre);

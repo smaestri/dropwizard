@@ -7,7 +7,8 @@
 	
 	<ul>
 		<#list books as book>
-			<li>${book.id} ${book.titre} <a href="/book/edit?id=${book.id}">EDIT</a></li>
+			<li>${book.id} ${book.titre}
+			 <a href="/book/edit?id=${book.id}">EDIT</a></li>
 		</#list>
 	</ul>
 </html>
