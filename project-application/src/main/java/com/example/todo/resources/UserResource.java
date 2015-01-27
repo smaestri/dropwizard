@@ -30,10 +30,10 @@ public class UserResource {
 	}
 
 	@Path("/list")
-	@Produces(MediaType.TEXT_HTML)
-	@UnitOfWork
-	@GET
-	public UserListView listUsers() {
+		 @Produces(MediaType.TEXT_HTML)
+		 @UnitOfWork
+		 @GET
+		 public UserListView listUsers() {
 		List<User> users = userDAO.findAll();
 		return new UserListView(users);
 	}
