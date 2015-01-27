@@ -2,6 +2,7 @@ package com.example.todo;
 
 import com.example.todo.core.Book;
 import com.example.todo.core.Todo;
+import com.example.todo.core.User;
 import com.example.todo.module.TodoModule;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
@@ -16,7 +17,9 @@ import io.dropwizard.views.ViewBundle;
 public class TodoApplication extends Application<TodoConfiguration> {
 
     private final HibernateBundle<TodoConfiguration> hibernateBundle =
-            new HibernateBundle<TodoConfiguration>(Todo.class, Book.class) {
+
+            new HibernateBundle<TodoConfiguration>(Todo.class, User.class, Book.class) {
+
                 @Override
                 public DataSourceFactory getDataSourceFactory(TodoConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -47,7 +50,6 @@ public class TodoApplication extends Application<TodoConfiguration> {
                 .addModule(new TodoModule(hibernateBundle))
                 .enableAutoConfig(getClass().getPackage().getName())
                 .setConfigClass(TodoConfiguration.class)
-                        //  .setInjectorFactory( new GovernatorInjectorFactory() )
                 .build();
         bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(new AssetsBundle("/assets/css", "/css", null, "css"));
