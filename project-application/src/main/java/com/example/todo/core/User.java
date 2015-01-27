@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,10 +32,10 @@ public class User {
 	
 	@Column(name = "last_name", nullable = false)
     private String lastName;
-//	
-//	@OneToMany()
-//	@JoinColumn(name="id")
-//	private Set<Book> books;
+	
+	@OneToMany()
+	@JoinColumn(name="id")
+	private Set<Book> books;
 
 	public long getId() {
 		return id;
@@ -62,11 +61,11 @@ public class User {
 		this.lastName = lastName;
 	}
 
-//	public Set<Book> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(Set<Book> books) {
-//		this.books = books;
-//	}
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
 }

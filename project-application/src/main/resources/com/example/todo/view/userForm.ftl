@@ -8,6 +8,8 @@
 	</#if>
 	
 	<p><a href="/users/list">BACK THE THE LIST</a></p>
+
+	<h4>User :</h4>
 	
 	<form method="POST"  <#if user.isPresent()>  action="/users/edit" <#else> action="/users/create" </#if>>
 		<#if user.isPresent()><input type="hidden" name="id" value="${user.get().getId()}"/></#if>
@@ -15,5 +17,14 @@
 		Last name : <input type="text" name="lastName" <#if user.isPresent()> value ="${user.get().getLastName()}" </#if>>
 		<input type="submit" value="Submit">
 	</form>
+
+	<#if user.isPresent()>
+		<h4>Books :</h4>
+		<ul>
+
+		</ul>
+	</#if>
+
+	
 		
 </html>
