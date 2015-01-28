@@ -91,4 +91,16 @@ public class BookResource {
         return listAll();
     }
 
+    @Path("/delete")
+    @Produces(MediaType.TEXT_HTML)
+    @UnitOfWork
+    @GET
+    public View deleteBook(@QueryParam(value = "id") Long id) {
+        Optional<Book> book = bookDAO.findById(id);
+        if (book.isPresent()) {
+            bookDAO.delete(book.get());
+        }
+        return listAll();
+    }
+
 }

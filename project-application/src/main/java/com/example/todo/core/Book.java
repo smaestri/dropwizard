@@ -18,11 +18,8 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Todo> listTask;
-
-
-//    private User user;
 
     @Column(name = "titre", nullable = false)
     private String titre;
@@ -34,14 +31,6 @@ public class Book {
     public void setListTask(List<Todo> listTask) {
         this.listTask = listTask;
     }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public String getTitre() {
         return titre;
