@@ -6,7 +6,6 @@ import com.example.todo.db.TodoDAO;
 import com.example.todo.db.UserDAO;
 import com.google.inject.Binder;
 import com.google.inject.Provides;
-
 import io.dropwizard.hibernate.HibernateBundle;
 
 public class TodoModule implements com.google.inject.Module {
@@ -25,10 +24,10 @@ public class TodoModule implements com.google.inject.Module {
     public TodoDAO getTodoDAO() {
         return new TodoDAO(hibernateBundle.getSessionFactory());
     }
-    
+
     @Provides
     public UserDAO getUserDAO() {
-    	return new UserDAO(hibernateBundle.getSessionFactory());
+        return new UserDAO(hibernateBundle.getSessionFactory());
     }
 
     @Provides

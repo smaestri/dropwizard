@@ -2,13 +2,10 @@ package com.example.todo.resources;
 
 import com.example.todo.core.Book;
 import com.example.todo.core.Todo;
-import com.example.todo.core.User;
 import com.example.todo.db.BookDAO;
 import com.example.todo.db.TodoDAO;
 import com.example.todo.view.BookFormView;
 import com.example.todo.view.BookListView;
-import com.example.todo.view.UserFormView;
-import com.example.todo.view.UserListView;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -36,7 +33,6 @@ public class BookResource {
     @Path("/list")
     @Produces(MediaType.TEXT_HTML)
     public BookListView listAll() {
-        //TODO : jointure sur les taches pour les afficher
         List<Book> all = bookDAO.findAll();
         return new BookListView(all);
     }

@@ -4,11 +4,9 @@ import io.dropwizard.hibernate.AbstractDAO;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 
 import com.example.todo.core.Book;
-import com.example.todo.core.Todo;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 
@@ -35,8 +33,8 @@ public class BookDAO extends AbstractDAO<Book> {
     	currentSession().delete(b);
     }
 
-    public List<Todo> getTasksFromBook(int bookId) {
-        Criteria criteria = this.currentSession().createCriteria(Todo.class);
-        return criteria.list();
-    }
+//    public Book getTasksFromBook(int bookId) {
+//        Criteria criteria = this.currentSession().createCriteria(Todo.class);
+//        return criteria.list();
+//    }
 }

@@ -8,6 +8,8 @@
 	<ul>
 		<#list books as book>
 			<li>${book.id} ${book.titre}
+			 Liste taches :
+             <#list book.listTask as task>${task.id} ${task.libelle} </#list><br/>
 			 <a href="/book/edit?id=${book.id}">EDIT</a></li>
 		</#list>
 	</ul>

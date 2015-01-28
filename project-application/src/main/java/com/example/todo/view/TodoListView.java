@@ -5,17 +5,15 @@ import io.dropwizard.views.View;
 
 import java.util.List;
 
-public class TodoView extends View {
-
+public class TodoListView extends View {
     private final List<Todo> todos;
 
-    public TodoView(List<Todo> todos) {
-        super("todo.ftl");
+    public TodoListView(List<Todo> todos) {
+        super("todoList.ftl");
         this.todos = todos;
     }
 
     public List<Todo> getTodos() {
         return todos;
     }
-
 }

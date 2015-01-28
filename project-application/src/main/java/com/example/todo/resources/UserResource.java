@@ -1,7 +1,6 @@
 package com.example.todo.resources;
 
 import io.dropwizard.hibernate.UnitOfWork;
-import io.dropwizard.jersey.params.LongParam;
 import io.dropwizard.views.View;
 
 import java.util.List;
@@ -35,10 +34,10 @@ public class UserResource {
 	}
 
 	@Path("/list")
-		 @Produces(MediaType.TEXT_HTML)
-		 @UnitOfWork
-		 @GET
-		 public UserListView listUsers() {
+	@Produces(MediaType.TEXT_HTML)
+	@UnitOfWork
+	@GET
+	public UserListView listUsers() {
 		List<User> users = userDAO.findAll();
 		return new UserListView(users);
 	}
