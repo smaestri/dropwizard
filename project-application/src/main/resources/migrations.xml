@@ -23,6 +23,7 @@
             <column name="titre" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="id_user" type="bigint"></column>
         </createTable>
     </changeSet>
     <changeSet id="2" author="tbe">

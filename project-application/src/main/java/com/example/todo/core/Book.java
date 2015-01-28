@@ -17,6 +17,10 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    
+    @ManyToOne()
+    @JoinColumn(name="id_user")
+    private User owner;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Todo> listTask;
@@ -54,4 +58,12 @@ public class Book {
     public void setId(long id) {
         this.id = id;
     }
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
 }

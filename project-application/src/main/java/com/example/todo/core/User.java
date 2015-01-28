@@ -34,8 +34,7 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="id")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="owner")
 	private Set<Book> books;
 
     public long getId() {

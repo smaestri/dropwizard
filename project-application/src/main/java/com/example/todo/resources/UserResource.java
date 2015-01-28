@@ -4,6 +4,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.views.View;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -106,9 +107,12 @@ public class UserResource {
 		if(user.isPresent()) {
 			Book bookToAdd = new Book();
 			bookToAdd.setTitre(title);
-			bookDAO.create(bookToAdd);
+			bookToAdd.setOwner(user.get());
+			bookToAdd = bookDAO.create(bookToAdd);
+			user.get().getBooks().add(bookToAdd);
+			userDAO.update(user.get());
 		} 
-		return editUser(id);
+		return new UserFormView(user.get());
 	}
 	
 	@Path("/removeBook")
