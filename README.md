@@ -20,17 +20,20 @@ java -jar target/project-application-1.0-SNAPSHOT.jar server todo.yml
 
 3 - Query with REST :
 
+- API
+http://localhost:8080/
+
 - Get TODOS:
 ```
-GET method : http://localhost:8080/todo
+GET method : http://localhost:8080/todo/list
 ```
 
 - Add TODO :
 
 POST : send JSON to same URL in POST
 ```
- { 
-  "libelle": "test"
-}
+POST method : http://localhost:8080/todo/create
 ```
+
+
 
