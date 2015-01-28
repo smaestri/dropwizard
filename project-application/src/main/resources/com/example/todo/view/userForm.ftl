@@ -21,8 +21,19 @@
 	<#if user.isPresent()>
 		<h4>Books :</h4>
 		<ul>
-
+			<#list user.get().getBooks() as book>
+				<li>
+					${book.titre}
+					<!-- <a href="">EDIT</a> -->
+					<!-- <a href="/users/removeBook?id=${book.id}">REMOVE</a> -->
+				</li>
+			</#list>
 		</ul>
+		<form method="POST" action="/users/addBook">
+			<input type="hidden" name="id" value="${user.get().getId()}"/>
+			<input type="text" name="bookTitle">
+			<input type="submit" value="Add book">
+		</form>
 	</#if>
 
 	

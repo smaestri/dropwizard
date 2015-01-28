@@ -14,7 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.example.todo.core.Book;
 import com.example.todo.core.User;
+import com.example.todo.db.BookDAO;
 import com.example.todo.db.UserDAO;
 import com.example.todo.view.UserFormView;
 import com.example.todo.view.UserListView;
@@ -24,10 +26,12 @@ import com.google.inject.Inject;
 @Path("/users")
 public class UserResource {
 	private UserDAO userDAO;
+	private BookDAO bookDAO;
 
 	@Inject
-	public UserResource(UserDAO userDAO) {
+	public UserResource(UserDAO userDAO, BookDAO bookDAO) {
 		this.userDAO = userDAO;
+		this.bookDAO = bookDAO;
 	}
 
 	@Path("/list")
@@ -90,6 +94,35 @@ public class UserResource {
 		user.setLastName(lastName);
 		userDAO.create(user);
 		return listUsers();
+	}
+	
+	@Path("/addBook")
+	@Produces(MediaType.TEXT_HTML)
+	@UnitOfWork
+	@POST
+	public View addBook(
+			@FormParam(value = "id") Long id,
+			@FormParam(value = "bookTitle") String title) {
+		Optional<User> user = userDAO.findById(id);
+		if(user.isPresent()) {
+			Book bookToAdd = new Book();
+			bookToAdd.setTitre(title);
+			bookDAO.create(bookToAdd);
+		} 
+		return editUser(id);
+	}
+	
+	@Path("/removeBook")
+	@Produces(MediaType.TEXT_HTML)
+	@UnitOfWork
+	@POST
+	public View removeBook(
+			@QueryParam(value = "id") Long id) {
+		Optional<Book> book = bookDAO.findById(id);
+		if(book.isPresent()) {
+			bookDAO.delete(book.get());
+		} 
+		return editUser(id);
 	}
 	
 	@Path("/delete")

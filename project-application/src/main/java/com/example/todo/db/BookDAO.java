@@ -1,14 +1,16 @@
 package com.example.todo.db;
 
+import io.dropwizard.hibernate.AbstractDAO;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+
 import com.example.todo.core.Book;
 import com.example.todo.core.Todo;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
-import io.dropwizard.hibernate.AbstractDAO;
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-
-import java.util.List;
 
 public class BookDAO extends AbstractDAO<Book> {
 
@@ -27,6 +29,10 @@ public class BookDAO extends AbstractDAO<Book> {
 
     public List<Book> findAll() {
         return list(namedQuery("Book.findAll"));
+    }
+    
+    public void delete(Book b) {
+    	currentSession().delete(b);
     }
 
     public List<Todo> getTasksFromBook(int bookId) {
