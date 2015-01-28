@@ -1,11 +1,9 @@
 package com.example.todo.db;
 
 import com.example.todo.core.Book;
-import com.example.todo.core.Todo;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import io.dropwizard.hibernate.AbstractDAO;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -29,8 +27,8 @@ public class BookDAO extends AbstractDAO<Book> {
         return list(namedQuery("Book.findAll"));
     }
 
-    public List<Todo> getTasksFromBook(int bookId) {
-        Criteria criteria = this.currentSession().createCriteria(Todo.class);
-        return criteria.list();
-    }
+//    public Book getTasksFromBook(int bookId) {
+//        Criteria criteria = this.currentSession().createCriteria(Todo.class);
+//        return criteria.list();
+//    }
 }

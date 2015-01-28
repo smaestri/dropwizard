@@ -1,6 +1,5 @@
 package com.example.todo.db;
 
-import com.example.todo.api.ExternalTodo;
 import com.example.todo.core.Todo;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
@@ -21,9 +20,7 @@ public class TodoDAO extends AbstractDAO<Todo> {
         return Optional.fromNullable(get(id));
     }
 
-    public Todo create(ExternalTodo etodo) {
-        Todo todo = new Todo();
-        todo.setLibelle(etodo.getLibelle());
+    public Todo create(Todo todo) {
         return persist(todo);
     }
 

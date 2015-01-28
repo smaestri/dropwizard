@@ -1,11 +1,9 @@
 package com.example.todo.view;
 
-import java.util.List;
-
 import com.example.todo.core.Book;
-import com.example.todo.core.User;
-
 import io.dropwizard.views.View;
+
+import java.util.List;
 
 public class BookListView extends View {
     private final List<Book> books;
