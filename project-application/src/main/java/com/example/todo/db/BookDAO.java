@@ -29,10 +29,6 @@ public class BookDAO extends AbstractDAO<Book> {
         return list(namedQuery("Book.findAll"));
     }
     
-    public void delete(Book b) {
-    	currentSession().delete(b);
-    }
-
     public void delete(Book book) {
         currentSession().delete(book);
     }
