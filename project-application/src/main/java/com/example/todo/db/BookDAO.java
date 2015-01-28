@@ -33,6 +33,10 @@ public class BookDAO extends AbstractDAO<Book> {
     	currentSession().delete(b);
     }
 
+    public void delete(Book book) {
+        currentSession().delete(book);
+    }
+
 //    public Book getTasksFromBook(int bookId) {
 //        Criteria criteria = this.currentSession().createCriteria(Todo.class);
 //        return criteria.list();

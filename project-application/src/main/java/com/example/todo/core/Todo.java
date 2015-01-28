@@ -19,7 +19,7 @@ public class Todo {
     @Column(name = "libelle", nullable = false)
     private String libelle;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "ID_BOOK", nullable = false)
     private Book book;
 

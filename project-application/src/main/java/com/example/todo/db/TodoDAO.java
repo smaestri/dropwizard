@@ -32,4 +32,8 @@ public class TodoDAO extends AbstractDAO<Todo> {
         Criteria criteria = this.currentSession().createCriteria(Todo.class);
         return criteria.list();
     }
+
+    public void delete(Todo todo) {
+        currentSession().delete(todo);
+    }
 }
